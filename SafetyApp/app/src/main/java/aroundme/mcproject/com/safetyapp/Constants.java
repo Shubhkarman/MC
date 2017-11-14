@@ -17,13 +17,15 @@ public interface Constants {
     String MESSAGE = "message";
     String DISTANCE = "distance";
     String DISTANCE_VALUE = "1";
+    String OPEN_SOS_REQUEST = "OpenSOSRequests";
 
     // Constant URI
     String URI_BUILD_SCHEME = "http";
     String UPDATE_LOCATION_URI = "androidServer/UpdateLocation";
     String SIGN_UP_URI = "androidServer/SignUp";
-    String POST_SOS_REQUEST = "androidServer/PostSOSRequest";
+    String POST_SOS_REQUEST_URI = "androidServer/PostSOSRequest";
     String LOG_IN_URI = "androidServer/AuthenticateCred";
+    String OPEN_SOS_REQUEST_URI = "androidServer/OpenSOSRequest";
 
     String PREF_CONSTANT = "com.mcproject.aroundme";
 }

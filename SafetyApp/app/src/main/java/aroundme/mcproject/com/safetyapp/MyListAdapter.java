@@ -1,6 +1,7 @@
 package aroundme.mcproject.com.safetyapp;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -30,32 +31,35 @@ public class MyListAdapter extends ArrayAdapter<SOSMessage> {
 
     @Override
     public int getCount() {
-        return 1;//allPersons .size();
+        return allMessages.size();//allPersons .size();
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         final ViewHolder holder;
-        int type = getItemViewType(position);
         if (convertView == null) {
             holder = new ViewHolder();
-            switch (type) {
-                case 1:
-                    convertView = mInflater.inflate(R.layout.listview_item,parent, false);
-                    holder.contact = (TextView) convertView.findViewById(R.id.contact);
-                    holder.message = (TextView) convertView.findViewById(R.id.message);
-                    break;
-            }
+            convertView = mInflater.inflate(R.layout.listview_item,parent, false);
+            holder.contact = (TextView) convertView.findViewById(R.id.contact);
+            holder.message = (TextView) convertView.findViewById(R.id.message);
             convertView.setTag(holder);
         } else {
             holder = (ViewHolder) convertView.getTag();
         }
+        if (position >= allMessages.size())
+            return convertView;
+        Log.v("Dilraj", "Setting text" + position + allMessages.get(position).message);
         holder.contact.setText(allMessages.get(position).username);
         holder.message.setText(allMessages.get(position).message);
         holder.pos = position;
         return convertView;
     }
 
+    public void addItem(ArrayList<SOSMessage> l) {
+        allMessages.clear();
+        allMessages.addAll(l);
+        this.notifyDataSetChanged();
+    }
     @Override
     public void notifyDataSetChanged() {
         super.notifyDataSetChanged();

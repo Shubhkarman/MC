@@ -9,7 +9,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -35,7 +34,7 @@ public class PostSOSRequest extends AppCompatActivity implements Constants {
     public void postSOSRequest(View view) {
         Uri.Builder builder = new Uri.Builder();
         builder.scheme(URI_BUILD_SCHEME).encodedAuthority(HOST);
-        builder.appendPath(POST_SOS_REQUEST);
+        builder.appendPath(POST_SOS_REQUEST_URI);
         String urlString = builder.build().toString();
 
         String message = ((EditText) findViewById(R.id.message)).getText().toString();
