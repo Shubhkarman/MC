@@ -7,6 +7,9 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 
@@ -29,6 +32,26 @@ public class PostSOSRequest extends AppCompatActivity implements Constants {
         Log.v(TAG, "Triggering background service");
         Intent serviceIntent = new Intent(this, LocationUpdateService.class);
         this.startService(serviceIntent);
+    }
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.ourmenu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_repo)
+        {
+            String x = (String) item.getTitle();
+            item.setTitle("Reputation: " + String.valueOf(Integer.valueOf(x.charAt(x.length()-1))-48));
+            return true;
+        }
+        else if(item.getItemId()==R.id.action_settings)
+        {
+            Intent i = new Intent(this,Setting.class);
+            startActivity(i);
+        }
+        return false;
     }
 
     public void postSOSRequest(View view) {

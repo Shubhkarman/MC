@@ -11,11 +11,11 @@
     tools:context="aroundme.mcproject.com.safetyapp.AcceptedSOSRequest">
 
     <Button
-        android:text="Goto GPS Location"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
         android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
         android:onClick="goToLocation"
-        android:id="@+id/button2" />
+        android:text="Goto GPS Location" />
 </RelativeLayout>

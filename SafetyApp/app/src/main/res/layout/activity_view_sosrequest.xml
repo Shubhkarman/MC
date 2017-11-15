@@ -8,15 +8,18 @@
     android:orientation="vertical">
 
 
-<ListView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-    android:id="@+id/mainListView">
-</ListView>
     <Button
         android:id="@+id/post_request_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="POST SOS REQUEST"
-        android:onClick="postRequestActivity"/>
+        android:onClick="postRequestActivity"
+        android:layout_gravity="center"
+        android:background="@color/colorALL"/>
+
+    <ListView
+        android:id="@+id/mainListView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+    />
 </LinearLayout>

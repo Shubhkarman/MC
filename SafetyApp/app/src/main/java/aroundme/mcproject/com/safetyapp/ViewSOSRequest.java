@@ -4,9 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -18,13 +22,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class ViewSOSRequest extends AppCompatActivity implements Constants {
 
     private ListView mainListView;
     private ArrayAdapter<String> listAdapter;
     private final String TAG = "ViewSOS";
-
+    private static int count = 0;
     private ArrayList<SOSMessage> sosMessages;
     private MyListAdapter mAdapter;
 
@@ -32,14 +37,12 @@ public class ViewSOSRequest extends AppCompatActivity implements Constants {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_sosrequest);
+        SharedPreferences pref = getApplicationContext().getSharedPreferences(PREF_CONSTANT, Context.MODE_PRIVATE);
+        pref.edit().putInt("Count", 0).apply();
 
-        pollToServer();
-
-
-        // Find the ListView resource.
         mainListView = (ListView) findViewById( R.id.mainListView );
         sosMessages = new ArrayList<SOSMessage>();
-        sosMessages.add(new SOSMessage("Help Me!!", "7508584253", "1.00000", "0.00000"));
+        sosMessages.add(new SOSMessage("Shubhkarman", "Help me!!", "1.00000", "0.00000"));
 
         this.mAdapter = new MyListAdapter(this, sosMessages);
         mainListView.setAdapter(mAdapter);
@@ -51,14 +54,47 @@ public class ViewSOSRequest extends AppCompatActivity implements Constants {
             public void onItemClick(AdapterView<?> arg0, View arg1, int pos,
                                     long arg3) {
                 //Log.i("m", "-"+pos);
-
-                Intent myIntent = new Intent(ViewSOSRequest.this, AcceptedSOSRequest.class);
-                myIntent.putExtra("latitude", sosMessages.get(pos).latitude);
-                myIntent.putExtra("longitude", sosMessages.get(pos).longitude);
-                startActivity(myIntent);
+                String uri = String.format(Locale.ENGLISH, "geo:%s,%s", sosMessages.get(pos).latitude,
+                        sosMessages.get(pos).longitude);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(intent);
             }
         });
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (true) {
+                    pollToServer();
+                    try {
+                        Thread.sleep(5000);
+                    } catch (Exception e) {}
+                }
+            }
+        }).start();
+        // Find the ListView resource.
     }
+
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.ourmenu, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.action_repo)
+        {
+            String x = (String) item.getTitle();
+            item.setTitle("Reputation: " + String.valueOf(Integer.valueOf(x.charAt(x.length()-1))-48));
+            return true;
+        }
+        else if(item.getItemId()==R.id.action_settings)
+        {
+            Intent i = new Intent(this,Setting.class);
+            startActivity(i);
+        }
+        return false;
+    }
+
 
     private void pollToServer() {
 

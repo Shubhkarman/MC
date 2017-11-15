@@ -17,14 +17,18 @@
             android:layout_height="wrap_content"
             android:inputType="textNoSuggestions"
             android:hint="username"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColorHint="@color/colorALL"
+            android:textColor="@color/colorALL"/>
 
         <EditText android:id="@+id/input_password_login"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="textPassword"
             android:hint="Password"
-            android:layout_weight="1" />
+            android:layout_weight="1"
+            android:textColorHint="@color/colorALL"
+            android:textColor="@color/colorALL"/>
 
         <Button
             android:id="@+id/btn_login"
@@ -34,7 +38,8 @@
             android:layout_marginBottom="24dp"
             android:padding="12dp"
             android:text="Login"
-            android:onClick="login"/>
+            android:onClick="login"
+            android:background="@color/colorALL"/>
 
         <TextView android:id="@+id/link_signup"
             android:layout_width="fill_parent"
@@ -43,7 +48,9 @@
             android:text="No account yet? Create one"
             android:gravity="center"
             android:textSize="16dip"
-            android:onClick="signUpActivity"/>
+            android:onClick="signUpActivity"
+            android:textColorHint="@color/colorALL"
+            android:textColor="@color/colorALL"/>
     </LinearLayout>
 
 </LinearLayout>

@@ -12,7 +12,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        android:textColorHint="@color/colorALL"
+        android:textColor="@color/colorALL"/>
 
     <Button
         android:id="@+id/button"
@@ -22,5 +24,8 @@
         android:text="Post"
         tools:layout_editor_absoluteX="127dp"
         tools:layout_editor_absoluteY="312dp"
-        android:onClick="postSOSRequest"/>
+        android:onClick="postSOSRequest"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:background="@color/colorALL"/>
 </LinearLayout>

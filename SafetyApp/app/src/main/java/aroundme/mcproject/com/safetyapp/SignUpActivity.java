@@ -5,6 +5,9 @@ import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -32,6 +35,8 @@ public class SignUpActivity extends AppCompatActivity implements Constants {
         contactTextView = (TextView) findViewById(R.id.input_contact_signup);
         signupButton = (Button) findViewById(R.id.signup_button);
     }
+
+
 
     public void signUp(View view) {
         if (!validate()) {
